@@ -4,7 +4,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ProseMirror {
     String label;
-    String locator = "//p[@class='gYZSEd']";
+    String locator = "//label[text()='%s']/following-sibling::div//div[contains(@class, 'ProseMirror')]//p";
 
     public ProseMirror(String label) {
         this.label = label;
