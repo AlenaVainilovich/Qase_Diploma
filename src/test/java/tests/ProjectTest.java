@@ -38,8 +38,6 @@ public class ProjectTest extends BaseTest {
         projectsPage
                 .openPage()
                 .verifyIsProjectExist(project);
-
-
     }
 
 }

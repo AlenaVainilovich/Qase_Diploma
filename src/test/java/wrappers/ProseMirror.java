@@ -15,4 +15,5 @@ public class ProseMirror {
         $x((String.format(locator, label))).clear();
         $x((String.format(locator, label))).setValue(text);
     }
+
 }
