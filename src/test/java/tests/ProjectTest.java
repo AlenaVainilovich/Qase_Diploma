@@ -39,14 +39,15 @@ public class ProjectTest extends BaseTest {
             .description(description)
             .build();
 
-    @Test
+// Не знаю, что за тест ты тут хотела написать.
+/*    @Test
     public void projectShouldBeCreated() {
         loginPage.openLoginPage();
         loginPage.login(user, password);
         projectsPage.waitTillOpened();
-    }
+    }*/
 
-    @Test
+    @Test(description = "A new public project should be created with valid data")
     public void createNewProject() {
         loginPage
                 .openLoginPage()
@@ -65,7 +66,7 @@ public class ProjectTest extends BaseTest {
                 .verifyIsProjectExist(project);
     }
 
-    @Test
+    @Test(description = "Project data should be updated with valid data")
     public void updateProjectData() {
         loginPage
                 .openLoginPage()
@@ -102,7 +103,7 @@ public class ProjectTest extends BaseTest {
                 "projectDescription is not matched");
     }
 
-    @Test
+    @Test(description = "The project should be deleted")
     public void deleteTheProject() {
         loginPage
                 .openLoginPage()
@@ -130,7 +131,7 @@ public class ProjectTest extends BaseTest {
         sleep(2000);
     }
 
-    @Test
+    @Test(description = "A new project should not be created with 'Project code' more than 10 characters")
     public void projectShouldNotBeCreatedWithProjectCodeMoreThanTenCharacters() {
         loginPage
                 .openLoginPage()
@@ -151,7 +152,7 @@ public class ProjectTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(description = " A new project should not be created with 'Project code' less than 2 characters")
     public void projectShouldNotBeCreatedWithProjectCodeLessThanTwoCharacters() {
         loginPage
                 .openLoginPage()
