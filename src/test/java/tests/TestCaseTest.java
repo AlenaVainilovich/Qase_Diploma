@@ -26,7 +26,7 @@ public class TestCaseTest extends BaseTest {
             .postConditions(postConditions)
             .build();
 
-    @Test(description = "A New test case should be created with valid data")
+    @Test
     public void createNewCase() {
         loginPage
                 .openLoginPage()
@@ -48,7 +48,7 @@ public class TestCaseTest extends BaseTest {
 
     }
 
-    @Test(description = "A test case should be deleted")
+    @Test
     public void deleteCase() {
         loginPage
                 .openLoginPage()
