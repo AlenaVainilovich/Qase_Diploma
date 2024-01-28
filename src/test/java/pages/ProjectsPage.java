@@ -46,4 +46,11 @@ public class ProjectsPage {
         assertEquals("BLA repository", $(By.xpath("//*[text()=' repository']")).getText());
     }
 
+    @Step("Checking that the project is deleted")
+    public ProjectsPage verifyIfProjectDelete(Project project) {
+        log.info("Checking that the project '{}' is deleted", project.getProjectName());
+        $x(String.format(PROJECT_NAME, project.getProjectName())).shouldNotBe(Condition.visible);
+        return this;
+    }
+
 }
