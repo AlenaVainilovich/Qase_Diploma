@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.assertEquals;
 
 @Log4j2
-public class ProjectsPage {
+public class ProjectsPage extends BasePage{
 
     public final String PROJECT_NAME = "//a[contains(text(),'%s')]";
     public final String CREATE_NEW_PROJECT_BUTTON = "#createButton";

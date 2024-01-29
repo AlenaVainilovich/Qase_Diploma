@@ -149,7 +149,6 @@ public class ProjectTest extends BaseTest {
                         getProjectCodeErrorMessage(),
                 "The code may not be greater than 10 characters.",
                 "Incorrect error message text");
-
     }
 
     @Test(description = " A new project should not be created with 'Project code' less than 2 characters")

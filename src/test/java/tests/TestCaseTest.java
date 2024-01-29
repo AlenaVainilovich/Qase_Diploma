@@ -1,10 +1,11 @@
 package tests;
 
+import com.codeborne.selenide.Condition;
 import dto.TestCase;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
 
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class TestCaseTest extends BaseTest {
@@ -20,14 +21,23 @@ public class TestCaseTest extends BaseTest {
             .severity("Major")
             .priority("High")
             .type("Smoke")
+            .layer("E2E")
+            .isFlaky("Yes")
             .behavior("Positive")
             .automationStatus("Automated")
             .preConditions(preConditions)
             .postConditions(postConditions)
             .build();
 
+    TestCase editedCase = TestCase.builder()
+            .description(faker.backToTheFuture().quote())
+            .severity("Minor")
+            .priority("Medium")
+            .preConditions(faker.gameOfThrones().house())
+            .build();
+
     @Test
-    public void createNewCase() {
+    public void createEditDeleteNewCase() {
         loginPage
                 .openLoginPage()
                 .isPageOpened()
@@ -43,7 +53,16 @@ public class TestCaseTest extends BaseTest {
                 .clickOnTheCaseName(newCase)
                 .clickOnTheEditCaseButton();
         editCasePage
-                .isPageOpened();
+               .isPageOpened()
+               .editTestCase(editedCase)
+               .clickOnSaveEditedCaseButton();
+        repositoryPage
+                .isPageOpened()
+                .verifyIfCaseExist(newCase)
+                .clickOnTheCaseName(newCase)
+                .clickOnTheDeleteButton();
+        repositoryPage.confirmDeleting();
+
 
 
     }
@@ -68,7 +87,6 @@ public class TestCaseTest extends BaseTest {
                 .clickOnTheDeleteButton();
         sleep(2000);
         repositoryPage.confirmDeleting();
-
 
     }
 }

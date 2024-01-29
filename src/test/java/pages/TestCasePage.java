@@ -11,7 +11,6 @@ import static com.codeborne.selenide.Selenide.open;
 public class TestCasePage extends BasePage {
 
     public final String CASE_TITLE = "#title";
-
     public final String SAVE_BUTTON = "#save-case";
     //public static Random random = new Random();
 
@@ -48,8 +47,6 @@ public class TestCasePage extends BasePage {
     public void openTestRepositoryPage() {
         open("https://app.qase.io/case/TEST");
     }
-
-    //https://app.qase.io/case/TEST/create
 
     public RepositoryPage clickOnSaveNewCaseButton() {
         $(SAVE_BUTTON).shouldBe(Condition.appear).click();
