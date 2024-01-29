@@ -22,6 +22,7 @@ public class BaseTest {
     TestCasePage testCasePage;
     RepositoryPage repositoryPage;
     EditCasePage editCasePage;
+    ProjectSettingsPage projectSettingsPage;
     String user;
     String password;
 
@@ -45,6 +46,7 @@ public class BaseTest {
         testCasePage = new TestCasePage();
         repositoryPage = new RepositoryPage();
         editCasePage = new EditCasePage();
+        projectSettingsPage = new ProjectSettingsPage();
     }
 
     @AfterMethod(alwaysRun = true)
