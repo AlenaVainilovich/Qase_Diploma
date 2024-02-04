@@ -9,8 +9,6 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-import static org.testng.Assert.assertEquals;
-
 
 @Log4j2
 public class RepositoryPage {

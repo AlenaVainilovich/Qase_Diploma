@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Project {
-    String projectName;
-    String projectCode;
+    String title;
+    String code;
     String description;
 }

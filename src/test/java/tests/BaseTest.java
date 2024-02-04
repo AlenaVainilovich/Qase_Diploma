@@ -1,5 +1,7 @@
 package tests;
 
+import adapters.BaseAdapter;
+import adapters.ProjectsAdapter;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
@@ -8,8 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
+import tests.base.TestListener;
 import utils.PropertyReader;
-import utils.TestListener;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
@@ -23,6 +25,8 @@ public class BaseTest {
     RepositoryPage repositoryPage;
     EditCasePage editCasePage;
     ProjectSettingsPage projectSettingsPage;
+    BaseAdapter baseAdapter;
+    ProjectsAdapter projectsAdapter;
     String user;
     String password;
 
@@ -47,6 +51,8 @@ public class BaseTest {
         repositoryPage = new RepositoryPage();
         editCasePage = new EditCasePage();
         projectSettingsPage = new ProjectSettingsPage();
+        baseAdapter = new BaseAdapter();
+        projectsAdapter = new ProjectsAdapter();
     }
 
     @AfterMethod(alwaysRun = true)

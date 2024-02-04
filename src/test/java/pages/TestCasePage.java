@@ -32,11 +32,11 @@ public class TestCasePage extends BasePage {
         new DropDown("Priority").select(testCase.getPriority());
         new DropDown("Type").select(testCase.getType());
         new DropDown("Layer").select(testCase.getLayer());
-        new DropDown("Is flaky").select(testCase.getIsFlaky());
+        new DropDown("Is flaky").select(testCase.getIsflaky());
         new DropDown("Behavior").select(testCase.getBehavior());
-        new DropDown("Automation status").select(testCase.getAutomationStatus());
-        new ProseMirror("Pre-conditions").write(testCase.getPreConditions());
-        new ProseMirror("Post-conditions").write(testCase.getPostConditions());
+        new DropDown("Automation status").select(testCase.getAutomation());
+        new ProseMirror("Pre-conditions").write(testCase.getPreconditions());
+        new ProseMirror("Post-conditions").write(testCase.getPostconditions());
         return this;
     }
 

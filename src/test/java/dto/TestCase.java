@@ -1,5 +1,6 @@
 package dto;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,10 +14,11 @@ public class TestCase {
     String priority;
     String type;
     String layer;
-    String isFlaky;
+    @SerializedName("is_flaky")
+    String isflaky;
     String behavior;
-    String automationStatus;
-    String preConditions;
-    String postConditions;
+    String automation;
+    String preconditions;
+    String postconditions;
 
 }

@@ -1,11 +1,10 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
 import dto.TestCase;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class TestCaseTest extends BaseTest {
@@ -22,18 +21,18 @@ public class TestCaseTest extends BaseTest {
             .priority("High")
             .type("Smoke")
             .layer("E2E")
-            .isFlaky("Yes")
+            .isflaky("Yes")
             .behavior("Positive")
-            .automationStatus("Automated")
-            .preConditions(preConditions)
-            .postConditions(postConditions)
+            .automation("Automated")
+            .preconditions(preConditions)
+            .postconditions(postConditions)
             .build();
 
     TestCase editedCase = TestCase.builder()
             .description(faker.backToTheFuture().quote())
             .severity("Minor")
             .priority("Medium")
-            .preConditions(faker.gameOfThrones().house())
+            .preconditions(faker.gameOfThrones().house())
             .build();
 
     @Test
@@ -53,16 +52,15 @@ public class TestCaseTest extends BaseTest {
                 .clickOnTheCaseName(newCase)
                 .clickOnTheEditCaseButton();
         editCasePage
-               .isPageOpened()
-               .editTestCase(editedCase)
-               .clickOnSaveEditedCaseButton();
+                .isPageOpened()
+                .editTestCase(editedCase)
+                .clickOnSaveEditedCaseButton();
         repositoryPage
                 .isPageOpened()
                 .verifyIfCaseExist(newCase)
                 .clickOnTheCaseName(newCase)
                 .clickOnTheDeleteButton();
         repositoryPage.confirmDeleting();
-
 
 
     }

@@ -21,7 +21,7 @@ public class EditCasePage {
         new ProseMirror("Description").write(editedCase.getDescription());
         new DropDown("Severity").select(editedCase.getSeverity());
         new DropDown("Priority").select(editedCase.getPriority());
-        new ProseMirror("Pre-conditions").write(editedCase.getPreConditions());
+        new ProseMirror("Pre-conditions").write(editedCase.getPreconditions());
         return this;
     }
 

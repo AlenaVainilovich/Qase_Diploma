@@ -18,34 +18,26 @@ public class ProjectTest extends BaseTest {
     ;
 
     Project project = Project.builder()
-            .projectName(projectName)
-            .projectCode(projectCode)
+            .title(projectName)
+            .code(projectCode)
             .description(description)
             .build();
 
     Project updatedProject = Project.builder()
-            .projectName(updatedProjectName)
-            .projectCode(updatedProjectCode)
+            .title(updatedProjectName)
+            .code(updatedProjectCode)
             .description(updatedDescription)
             .build();
     Project projectWithShortProjectCode = Project.builder()
-            .projectName(projectName)
-            .projectCode(shortProjectCode)
+            .title(projectName)
+            .code(shortProjectCode)
             .description(description)
             .build();
     Project projectWithLongProjectCode = Project.builder()
-            .projectName(projectName)
-            .projectCode(longProjectCode)
+            .title(projectName)
+            .code(longProjectCode)
             .description(description)
             .build();
-
-// Не знаю, что за тест ты тут хотела написать.
-/*    @Test
-    public void projectShouldBeCreated() {
-        loginPage.openLoginPage();
-        loginPage.login(user, password);
-        projectsPage.waitTillOpened();
-    }*/
 
     @Test(description = "A new public project should be created with valid data")
     public void createNewProject() {
@@ -169,6 +161,19 @@ public class ProjectTest extends BaseTest {
                         getProjectCodeErrorMessage(),
                 "The code must be at least 2 characters.",
                 "Incorrect error message text");
+
+    }
+
+    @Test
+    public void createProjectApi() {
+        loginPage
+                .openLoginPage()
+                .isPageOpened()
+                .login(user, password);
+        projectsPage
+                .waitTillOpened();
+        projectsAdapter
+                .create(project);
 
     }
 }
