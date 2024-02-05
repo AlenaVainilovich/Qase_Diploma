@@ -2,6 +2,7 @@ package tests;
 
 import adapters.BaseAdapter;
 import adapters.ProjectsAdapter;
+import adapters.SuiteAdapter;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
@@ -25,8 +26,10 @@ public class BaseTest {
     RepositoryPage repositoryPage;
     EditCasePage editCasePage;
     ProjectSettingsPage projectSettingsPage;
+    SuitesPage suitesPage;
     BaseAdapter baseAdapter;
     ProjectsAdapter projectsAdapter;
+    SuiteAdapter suiteAdapter;
     String user;
     String password;
 
@@ -51,8 +54,10 @@ public class BaseTest {
         repositoryPage = new RepositoryPage();
         editCasePage = new EditCasePage();
         projectSettingsPage = new ProjectSettingsPage();
+        suitesPage = new SuitesPage();
         baseAdapter = new BaseAdapter();
         projectsAdapter = new ProjectsAdapter();
+        suiteAdapter = new SuiteAdapter();
     }
 
     @AfterMethod(alwaysRun = true)

@@ -1,5 +1,6 @@
 package wrappers;
 
+
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ProseMirror {
@@ -15,5 +16,4 @@ public class ProseMirror {
         $x((String.format(locator, label))).clear();
         $x((String.format(locator, label))).setValue(text);
     }
-
 }

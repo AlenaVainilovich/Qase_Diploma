@@ -1,5 +1,7 @@
 package tests;
 
+import dto.Project;
+import dto.ProjectFactory;
 import dto.TestCase;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
@@ -8,6 +10,8 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class TestCaseTest extends BaseTest {
+
+    Project project = new ProjectFactory().newProject();
     public String title = faker.harryPotter().character();
     public String description = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
     public String preConditions = faker.beer().name();
@@ -21,7 +25,7 @@ public class TestCaseTest extends BaseTest {
             .priority("High")
             .type("Smoke")
             .layer("E2E")
-            .isflaky("Yes")
+            .isFlaky("Yes")
             .behavior("Positive")
             .automation("Automated")
             .preconditions(preConditions)
@@ -40,12 +44,17 @@ public class TestCaseTest extends BaseTest {
         loginPage
                 .openLoginPage()
                 .isPageOpened()
-                .login(PropertyReader.getProperty("user"), PropertyReader.getProperty("password"));
+                .login(user, password);
         projectsPage
                 .waitTillOpened();
-        testCasePage.openTestPage();
-        testCasePage.createNewTestCase(newCase);
-        testCasePage.clickOnSaveNewCaseButton();
+        projectsAdapter
+                .create(project);
+        repositoryPage
+                .openPage(project.getCode())
+                .clickOnTheCreateCaseButton();
+        testCasePage
+                .createNewTestCase(newCase)
+                .clickOnSaveNewCaseButton();
         repositoryPage
                 .isPageOpened()
                 .verifyIfCaseExist(newCase)
@@ -73,7 +82,10 @@ public class TestCaseTest extends BaseTest {
                 .login(PropertyReader.getProperty("user"), PropertyReader.getProperty("password"));
         projectsPage
                 .waitTillOpened();
-        testCasePage.openTestPage();
+        projectsAdapter
+                .create(project);
+        repositoryPage
+                .openPage(project.getCode());
         testCasePage.createNewTestCase(newCase);
         testCasePage.clickOnSaveNewCaseButton();
         repositoryPage
