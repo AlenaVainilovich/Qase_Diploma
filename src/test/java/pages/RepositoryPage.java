@@ -23,7 +23,7 @@ public class RepositoryPage {
     //public final String DELETE_SUITE_BUTTON = ".fa-trash";
     public final String CONFIRM_DELETE = "//div[contains(@class,'ReactModal__Content')]/descendant::*[text()='Delete']";
     public final String SIDEBAR_SECTION = "//*[contains(text(), '%s')]";
-    public final String ERROR_MESSAGE_FOR_PROJECT_CODE_CSS = ".fkMMG8";
+    public final String ERROR_MESSAGE_FOR_PROJECT_CODE_CSS = "//div//input[@id='project-code']/../..//div[contains(text(), 'The code ')]";
 
     public RepositoryPage isPageOpened() {
         $(CREATE_CASE_BUTTON).shouldBe(Condition.visible);
@@ -55,9 +55,9 @@ public class RepositoryPage {
 
     @Step("Checking error message below project code field")
     public String getProjectCodeErrorMessage() {
-        String errorMessage = $(ERROR_MESSAGE_FOR_PROJECT_CODE_CSS).getText();
+        String errorMessage = $x(ERROR_MESSAGE_FOR_PROJECT_CODE_CSS).getText();
         log.info("Checking error message '{}', below project code field", errorMessage);
-        return $(ERROR_MESSAGE_FOR_PROJECT_CODE_CSS).getText();
+        return $x(ERROR_MESSAGE_FOR_PROJECT_CODE_CSS).getText();
     }
 
     @Step("Verification if the sidebar is displayed")
