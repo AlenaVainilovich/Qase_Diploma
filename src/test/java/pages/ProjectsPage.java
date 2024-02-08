@@ -4,14 +4,12 @@ import com.codeborne.selenide.Condition;
 import dto.Project;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.*;
-import static org.testng.Assert.assertEquals;
 
 @Log4j2
-public class ProjectsPage extends BasePage{
+public class ProjectsPage extends BasePage {
 
     public final String PROJECT_NAME = "//a[contains(text(),'%s')]";
     public final String CREATE_NEW_PROJECT_BUTTON = "#createButton";
@@ -37,19 +35,14 @@ public class ProjectsPage extends BasePage{
     }
 
     public ProjectsPage verifyIsProjectExist(Project project) {
-        $x(String.format(PROJECT_NAME, project.getProjectName())).shouldBe(Condition.visible);
+        $x(String.format(PROJECT_NAME, project.getTitle())).shouldBe(Condition.visible);
         return this;
-    }
-
-
-    public void isRepositoryCreated() {
-        assertEquals("BLA repository", $(By.xpath("//*[text()=' repository']")).getText());
     }
 
     @Step("Checking that the project is deleted")
     public ProjectsPage verifyIfProjectDelete(Project project) {
-        log.info("Checking that the project '{}' is deleted", project.getProjectName());
-        $x(String.format(PROJECT_NAME, project.getProjectName())).shouldNotBe(Condition.visible);
+        log.info("Checking that the project '{}' is deleted", project.getTitle());
+        $x(String.format(PROJECT_NAME, project.getTitle())).shouldNotBe(Condition.visible);
         return this;
     }
 

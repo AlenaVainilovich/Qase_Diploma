@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Project {
+public class Suite {
     String title;
-    String code;
     String description;
+    String preconditions;
 }

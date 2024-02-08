@@ -1,44 +1,25 @@
 package tests;
 
 import dto.Project;
+import dto.ProjectFactory;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.testng.Assert.assertEquals;
 
 public class ProjectTest extends BaseTest {
-    public String projectName = faker.witcher().character();
-    public String projectCode = faker.currency().code();
-    public String description = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
     public String updatedProjectName = faker.witcher().character();
     public String updatedProjectCode = faker.currency().code();
     public String updatedDescription = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
-    public String shortProjectCode = faker.lorem().characters(1);
-    public String longProjectCode = faker.lorem().characters(11);
+
+    Project project = new ProjectFactory().newProject();
+    Project updatedProject = new ProjectFactory().updatedProject();
+    Project projectWithShortProjectCode = new ProjectFactory().projectWithShortProjectCode();
+    Project projectWithLongProjectCode = new ProjectFactory().projectWithLongProjectCode();
+
     public String publicProjectCode = faker.currency().code();
     public String deletedProjectCode = faker.currency().code();
 
-    Project project = Project.builder()
-            .projectName(projectName)
-            .projectCode(projectCode)
-            .description(description)
-            .build();
-
-    Project updatedProject = Project.builder()
-            .projectName(updatedProjectName)
-            .projectCode(updatedProjectCode)
-            .description(updatedDescription)
-            .build();
-    Project projectWithShortProjectCode = Project.builder()
-            .projectName(projectName)
-            .projectCode(shortProjectCode)
-            .description(description)
-            .build();
-    Project projectWithLongProjectCode = Project.builder()
-            .projectName(projectName)
-            .projectCode(longProjectCode)
-            .description(description)
-            .build();
     Project projectWithPublicProjectCode = Project.builder()
             .projectName(projectName)
             .projectCode(publicProjectCode)
@@ -49,7 +30,6 @@ public class ProjectTest extends BaseTest {
             .projectCode(deletedProjectCode)
             .description(description)
             .build();
-
 
     @Test(description = "A new public project should be created with valid data")
     public void createNewProject() {
@@ -173,6 +153,19 @@ public class ProjectTest extends BaseTest {
                         getProjectCodeErrorMessage(),
                 "The code must be at least 2 characters.",
                 "Incorrect error message text");
+
+    }
+
+    @Test
+    public void createProjectApi() {
+        loginPage
+                .openLoginPage()
+                .isPageOpened()
+                .login(user, password);
+        projectsPage
+                .waitTillOpened();
+        projectsAdapter
+                .create(project);
 
     }
 }

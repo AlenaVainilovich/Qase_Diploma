@@ -37,12 +37,11 @@ public class CreateNewProjectPage extends BasePage {
         return new CreateNewProjectPage();
     }
 
-
     public CreateNewProjectPage fillProjectFields(Project project) {
         $(PROJECT_NAME_CSS).clear();
-        $(PROJECT_NAME_CSS).setValue(project.getProjectName());
+        $(PROJECT_NAME_CSS).setValue(project.getTitle());
         $(PROJECT_CODE_CSS).clear();
-        $(PROJECT_CODE_CSS).setValue(project.getProjectCode());
+        $(PROJECT_CODE_CSS).setValue(project.getCode());
         $(DESCRIPTION_CSS).clear();
         $(DESCRIPTION_CSS).setValue(project.getDescription());
         return new CreateNewProjectPage();

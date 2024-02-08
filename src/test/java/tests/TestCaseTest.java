@@ -1,14 +1,17 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
+import dto.Project;
+import dto.ProjectFactory;
 import dto.TestCase;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class TestCaseTest extends BaseTest {
+
+    Project project = new ProjectFactory().newProject();
     public String title = faker.harryPotter().character();
     public String description = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
     public String preConditions = faker.beer().name();
@@ -24,16 +27,16 @@ public class TestCaseTest extends BaseTest {
             .layer("E2E")
             .isFlaky("Yes")
             .behavior("Positive")
-            .automationStatus("Automated")
-            .preConditions(preConditions)
-            .postConditions(postConditions)
+            .automation("Automated")
+            .preconditions(preConditions)
+            .postconditions(postConditions)
             .build();
 
     TestCase editedCase = TestCase.builder()
             .description(faker.backToTheFuture().quote())
             .severity("Minor")
             .priority("Medium")
-            .preConditions(faker.gameOfThrones().house())
+            .preconditions(faker.gameOfThrones().house())
             .build();
 
     @Test
@@ -41,28 +44,32 @@ public class TestCaseTest extends BaseTest {
         loginPage
                 .openLoginPage()
                 .isPageOpened()
-                .login(PropertyReader.getProperty("user"), PropertyReader.getProperty("password"));
+                .login(user, password);
         projectsPage
                 .waitTillOpened();
-        testCasePage.openTestPage();
-        testCasePage.createNewTestCase(newCase);
-        testCasePage.clickOnSaveNewCaseButton();
+        projectsAdapter
+                .create(project);
+        repositoryPage
+                .openPage(project.getCode())
+                .clickOnTheCreateCaseButton();
+        testCasePage
+                .createNewTestCase(newCase)
+                .clickOnSaveNewCaseButton();
         repositoryPage
                 .isPageOpened()
                 .verifyIfCaseExist(newCase)
                 .clickOnTheCaseName(newCase)
                 .clickOnTheEditCaseButton();
         editCasePage
-               .isPageOpened()
-               .editTestCase(editedCase)
-               .clickOnSaveEditedCaseButton();
+                .isPageOpened()
+                .editTestCase(editedCase)
+                .clickOnSaveEditedCaseButton();
         repositoryPage
                 .isPageOpened()
                 .verifyIfCaseExist(newCase)
                 .clickOnTheCaseName(newCase)
                 .clickOnTheDeleteButton();
         repositoryPage.confirmDeleting();
-
 
 
     }
@@ -75,7 +82,10 @@ public class TestCaseTest extends BaseTest {
                 .login(PropertyReader.getProperty("user"), PropertyReader.getProperty("password"));
         projectsPage
                 .waitTillOpened();
-        testCasePage.openTestPage();
+        projectsAdapter
+                .create(project);
+        repositoryPage
+                .openPage(project.getCode());
         testCasePage.createNewTestCase(newCase);
         testCasePage.clickOnSaveNewCaseButton();
         repositoryPage
