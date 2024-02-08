@@ -5,21 +5,20 @@ import com.github.javafaker.Faker;
 public class ProjectFactory {
     Faker faker = new Faker();
     public String projectName = faker.witcher().character();
-    public String projectCode = faker.currency().code();
+    public String projectCode = faker.lorem().characters(codeLength);
     public String description = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
     public String updatedProjectName = faker.witcher().character();
     public String updatedProjectCode = faker.currency().code();
     public String updatedDescription = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
-    public String shortProjectCode = faker.lorem().characters(1);
-    public String longProjectCode = faker.lorem().characters(11);
 
-    public Project newProject() {
+    public Project newProject(int codeLength) {
         return Project.builder()
                 .title(projectName)
                 .code(projectCode)
                 .description(description)
                 .build();
-    }
+     }
+
 
     public Project updatedProject() {
 
@@ -29,21 +28,4 @@ public class ProjectFactory {
                 .description(updatedDescription)
                 .build();
     }
-
-    public Project projectWithShortProjectCode() {
-        return Project.builder()
-                .title(projectName)
-                .code(shortProjectCode)
-                .description(description)
-                .build();
-    }
-
-    public Project projectWithLongProjectCode() {
-        return Project.builder()
-                .title(projectName)
-                .code(longProjectCode)
-                .description(description)
-                .build();
-    }
-
 }
