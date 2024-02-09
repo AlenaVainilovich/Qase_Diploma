@@ -30,7 +30,7 @@ jobs:
     - name: Qase tests
       run: mvn clean test -Duser=$USER -Dpassword=$PASSWORD -Dtoken=$TOKEN
       env:
-        USER: ${{ secrets.USER }}
-        PASSWORD: ${{ secrets.PASSWORD }}
-        TOKEN: ${{ secrets.TOKEN }}
+        user: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        token: ${{ secrets.TOKEN }}
       
