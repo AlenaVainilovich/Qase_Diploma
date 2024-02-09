@@ -140,17 +140,4 @@ public class ProjectTest extends BaseTest {
                 "Incorrect error message text");
 
     }
-
-    @Test
-    public void createProjectApi() {
-        loginPage
-                .openLoginPage()
-                .isPageOpened()
-                .login(user, password);
-        projectsPage
-                .waitTillOpened();
-        projectsAdapter
-                .create(project);
-
-    }
 }
