@@ -7,14 +7,13 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 import pages.*;
 import tests.base.TestListener;
 import utils.PropertyReader;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -33,10 +32,11 @@ public class BaseTest {
     String user;
     String password;
 
+    @Parameters({"browser"})
     @BeforeMethod(description = "Setup browser")
-    public void setup() {
-        Configuration.browser = "chrome";
-        Configuration.headless = false;
+    public void setup(@Optional("chrome") String browser) {
+
+        Configuration.headless = true;
         Configuration.timeout = 10000;
         Configuration.clickViaJs = false;
         Configuration.baseUrl = "https://app.qase.io";
