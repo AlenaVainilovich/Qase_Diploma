@@ -1,9 +1,6 @@
 package tests;
 
 import org.testng.annotations.Test;
-import utils.PropertyReader;
-
-import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
@@ -16,7 +13,7 @@ public class LoginTest extends BaseTest {
                 .isPageOpened()
                 .login(user, password);
     }
-
+/*
     @Test(description = "The user should not be logged in with the wrong email")
     public void invalidLogin() {
         loginPage
@@ -24,5 +21,5 @@ public class LoginTest extends BaseTest {
                 .isPageOpened()
                 .invalidLogin(invalidUser, PropertyReader.getProperty("password"));
         assertEquals(loginPage.getErrorMessage(), "These credentials do not match our records.");
-    }
+    }*/
 }

@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
+
 @Log4j2
 public class CreateNewProjectPage extends BasePage {
     public final String PROJECT_NAME_CSS = "#project-name";

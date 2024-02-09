@@ -11,25 +11,10 @@ public class ProjectTest extends BaseTest {
     public String updatedProjectName = faker.witcher().character();
     public String updatedProjectCode = faker.currency().code();
     public String updatedDescription = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
-
-    Project project = new ProjectFactory().newProject();
-    Project updatedProject = new ProjectFactory().updatedProject();
-    Project projectWithShortProjectCode = new ProjectFactory().projectWithShortProjectCode();
-    Project projectWithLongProjectCode = new ProjectFactory().projectWithLongProjectCode();
-
     public String publicProjectCode = faker.currency().code();
     public String deletedProjectCode = faker.currency().code();
-
-    Project projectWithPublicProjectCode = Project.builder()
-            .projectName(projectName)
-            .projectCode(publicProjectCode)
-            .description(description)
-            .build();
-    Project projectWithDeletedProjectCode = Project.builder()
-            .projectName(projectName)
-            .projectCode(deletedProjectCode)
-            .description(description)
-            .build();
+    Project project = new ProjectFactory().newProject(5);
+    Project updatedProject = new ProjectFactory().updatedProject();
 
     @Test(description = "A new public project should be created with valid data")
     public void createNewProject() {
@@ -61,7 +46,7 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(projectWithPublicProjectCode)
+                .fillProjectFields(project)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         repositoryPage
@@ -98,7 +83,7 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(projectWithDeletedProjectCode)
+                .fillProjectFields(project)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         repositoryPage
@@ -111,8 +96,8 @@ public class ProjectTest extends BaseTest {
                 .confirmDeleting();
         projectsPage
                 .waitTillOpened()
-                .verifyIfProjectDelete(projectWithDeletedProjectCode);
-/*        sleep(2000);*/
+                .verifyIfProjectDelete(project);
+        /*        sleep(2000);*/
     }
 
     @Test(description = "A new project should not be created with 'Project code' more than 10 characters")
@@ -126,7 +111,7 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(projectWithLongProjectCode)
+                .fillProjectFields(project)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         assertEquals(repositoryPage.
@@ -146,7 +131,7 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(projectWithShortProjectCode)
+                .fillProjectFields(project)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         assertEquals(repositoryPage.

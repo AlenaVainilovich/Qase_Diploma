@@ -1,22 +1,20 @@
 package tests;
 
+import adapters.ProjectsAdapter;
 import dto.Project;
 import dto.ProjectFactory;
 import dto.TestCase;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import utils.PropertyReader;
-
-import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class TestCaseTest extends BaseTest {
 
-    Project project = new ProjectFactory().newProject();
     public String title = faker.harryPotter().character();
     public String description = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
     public String preConditions = faker.beer().name();
     public String postConditions = faker.animal().name();
-
+    Project project = new ProjectFactory().newProject(5);
     TestCase newCase = TestCase.builder()
             .title(title)
             .status("Actual")
@@ -39,6 +37,11 @@ public class TestCaseTest extends BaseTest {
             .preconditions(faker.gameOfThrones().house())
             .build();
 
+    @AfterClass
+    public void deleteProject() {
+        new ProjectsAdapter().delete(project.getCode().toUpperCase());
+    }
+
     @Test
     public void createEditDeleteNewCase() {
         loginPage
@@ -50,7 +53,7 @@ public class TestCaseTest extends BaseTest {
         projectsAdapter
                 .create(project);
         repositoryPage
-                .openPage(project.getCode())
+                .openPage(project.getCode().toUpperCase())
                 .clickOnTheCreateCaseButton();
         testCasePage
                 .createNewTestCase(newCase)
@@ -71,32 +74,6 @@ public class TestCaseTest extends BaseTest {
                 .clickOnTheDeleteButton();
         repositoryPage.confirmDeleting();
 
-
-    }
-
-    @Test
-    public void deleteCase() {
-        loginPage
-                .openLoginPage()
-                .isPageOpened()
-                .login(PropertyReader.getProperty("user"), PropertyReader.getProperty("password"));
-        projectsPage
-                .waitTillOpened();
-        projectsAdapter
-                .create(project);
-        repositoryPage
-                .openPage(project.getCode());
-        testCasePage.createNewTestCase(newCase);
-        testCasePage.clickOnSaveNewCaseButton();
-        repositoryPage
-                .isPageOpened()
-                .verifyIfCaseExist(newCase)
-                .clickOnTheCaseName(newCase);
-        sleep(2000);
-        repositoryPage
-                .clickOnTheDeleteButton();
-        sleep(2000);
-        repositoryPage.confirmDeleting();
 
     }
 }

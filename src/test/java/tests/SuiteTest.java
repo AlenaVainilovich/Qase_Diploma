@@ -9,12 +9,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 public class SuiteTest extends BaseTest {
-    Project project = new ProjectFactory().newProject();
+    Project project = new ProjectFactory().newProject(7);
     Suite suite = new SuiteFactory().newSuite();
 
     @AfterClass
     public void deleteProject() {
-        new ProjectsAdapter().delete(project.getCode());
+        new ProjectsAdapter().delete(project.getCode().toUpperCase());
     }
 
     @Test
@@ -25,9 +25,7 @@ public class SuiteTest extends BaseTest {
                 .login(user, password);
         projectsAdapter
                 .create(project);
-        repositoryPage
-                .openPage(project.getCode());
         suiteAdapter
-                .create(project.getCode(), suite);
+                .create(project.getCode().toUpperCase(), suite);
     }
 }
