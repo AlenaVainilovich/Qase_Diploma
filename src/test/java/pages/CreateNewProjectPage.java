@@ -19,12 +19,13 @@ public class CreateNewProjectPage extends BasePage {
 
     public final String CREATE_PROJECT_BUTTON_CSS = "[type=submit]";
 
+    @Step("Waiting till the 'Create new project' modal window is opened")
     public CreateNewProjectPage isPageOpened() {
         $(CREATE_PROJECT_BUTTON_CSS).shouldBe(Condition.visible);
         return this;
     }
 
-    @Step("Click on 'Create project' button")
+    @Step("Clicking on 'Create project' button")
     public ProjectsPage clickOnCreateProjectButton() {
         log.info("Click button 'Create new project' by locator: " + CREATE_PROJECT_BUTTON_CSS);
         $(CREATE_PROJECT_BUTTON_CSS).click();
@@ -38,7 +39,11 @@ public class CreateNewProjectPage extends BasePage {
         return new CreateNewProjectPage();
     }
 
+    @Step("Filling the project fields")
     public CreateNewProjectPage fillProjectFields(Project project) {
+        log.info("Project fields is filling with " +
+                        "Project name = '{}', Project code = '{}', Description = '{}'",
+                project.getTitle(), project.getCode(), project.getDescription());
         $(PROJECT_NAME_CSS).clear();
         $(PROJECT_NAME_CSS).setValue(project.getTitle());
         $(PROJECT_CODE_CSS).clear();

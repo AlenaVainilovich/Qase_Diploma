@@ -28,21 +28,21 @@ public class ProjectSettingsPage {
         return this;
     }
 
-    @Step("Checking that the project name is '{actualProjectName}'")
+    @Step("Checking that the project name is updated")
     public String checkProjectName() {
         String actualProjectName = $(PROJECT_NAME_CSS).getValue();
         log.info("Checking that the project name is '{}'", actualProjectName);
         return actualProjectName;
     }
 
-    @Step("Checking that the project code is '{actualProjectCode}'")
+    @Step("Checking that the project code is updated")
     public String checkProjectCode() {
         String actualProjectCode = $(PROJECT_CODE_CSS).getValue();
         log.info("Checking that the project code is '{}'", actualProjectCode);
         return actualProjectCode;
     }
 
-    @Step("Checking that the project description is '{actualProjectDescription}'")
+    @Step("Checking that the project description is updated")
     public String checkProjectDescription() {
         String actualProjectDescription = $(DESCRIPTION_CSS).getValue();
         log.info("Checking that the project description is '{}'", actualProjectDescription);
@@ -68,7 +68,7 @@ public class ProjectSettingsPage {
         return new ProjectSettingsPage();
     }
 
-    @Step("Click on update setting button")
+    @Step("Clicking on update setting button")
     public ProjectSettingsPage clickOnUpdateSettingsButton() {
         $(UPDATE_SETTINGS_BUTTON_CSS).click();
         return this;
@@ -81,7 +81,7 @@ public class ProjectSettingsPage {
         return this;
     }
 
-    @Step("Click on delete project button")
+    @Step("Clicking on delete project button")
     public ProjectSettingsPage clickOnDeleteProjectButton() {
         $(DELETE_PROJECT_BUTTON_CSS).click();
         return this;
@@ -94,7 +94,7 @@ public class ProjectSettingsPage {
         return this;
     }
 
-    @Step("Click on confirm delete project button")
+    @Step("Clicking on confirm delete project button")
     public void confirmDeleting() {
         $x(CONFIRM_DELETE).click();
     }

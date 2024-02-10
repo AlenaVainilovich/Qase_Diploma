@@ -8,13 +8,13 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static org.testng.Assert.assertEquals;
 
 public class ProjectTest extends BaseTest {
-    public String updatedProjectName = faker.witcher().character();
-    public String updatedProjectCode = faker.currency().code();
-    public String updatedDescription = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
-    public String publicProjectCode = faker.currency().code();
-    public String deletedProjectCode = faker.currency().code();
-    Project project = new ProjectFactory().newProject(5);
+
+    Project projectForCreation = new ProjectFactory().newProject(5);
+    Project projectForUpdate = new ProjectFactory().updatedProject();
     Project updatedProject = new ProjectFactory().updatedProject();
+    Project projectForDelete = new ProjectFactory().newProject(5);
+    Project projectWithProjectCodeMoreThan10 = new ProjectFactory().newProject(11);
+    Project projectWithProjectCodeLessThan2 = new ProjectFactory().newProject(1);
 
     @Test(description = "A new public project should be created with valid data")
     public void createNewProject() {
@@ -27,12 +27,15 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(project)
+                .fillProjectFields(projectForCreation)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         projectsPage
                 .openPage()
-                .verifyIsProjectExist(project);
+                .verifyIsProjectExist(projectForCreation);
+/*        sleep(2000);
+        projectsAdapter
+                .delete(String.format(projectForCreation.getCode()).toUpperCase());*/
     }
 
     @Test(description = "Project data should be updated with valid data")
@@ -46,7 +49,7 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(project)
+                .fillProjectFields(projectForUpdate)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         repositoryPage
@@ -60,16 +63,19 @@ public class ProjectTest extends BaseTest {
         sleep(1000);
         assertEquals(projectSettingsPage.
                         checkProjectName(),
-                updatedProjectName,
+                updatedProject.getTitle(),
                 "projectName is not matched");
         assertEquals(projectSettingsPage.
                         checkProjectCode(),
-                updatedProjectCode,
+                updatedProject.getCode(),
                 "projectCode is not matched");
         assertEquals(projectSettingsPage.
                         checkProjectDescription(),
-                updatedDescription,
+                updatedProject.getDescription(),
                 "projectDescription is not matched");
+        sleep(1000);
+        projectsAdapter
+                .delete(String.format(updatedProject.getCode()).toUpperCase());
     }
 
     @Test(description = "The project should be deleted")
@@ -83,7 +89,7 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(project)
+                .fillProjectFields(projectForDelete)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         repositoryPage
@@ -96,8 +102,7 @@ public class ProjectTest extends BaseTest {
                 .confirmDeleting();
         projectsPage
                 .waitTillOpened()
-                .verifyIfProjectDelete(project);
-        /*        sleep(2000);*/
+                .verifyIfProjectDelete(projectForDelete);
     }
 
     @Test(description = "A new project should not be created with 'Project code' more than 10 characters")
@@ -111,7 +116,7 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(project)
+                .fillProjectFields(projectWithProjectCodeMoreThan10)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         assertEquals(repositoryPage.
@@ -131,7 +136,7 @@ public class ProjectTest extends BaseTest {
                 .clickOnCreateNewProjectButton();
         createNewProjectPage
                 .isPageOpened()
-                .fillProjectFields(project)
+                .fillProjectFields(projectWithProjectCodeLessThan2)
                 .selectAccessType()
                 .clickOnCreateProjectButton();
         assertEquals(repositoryPage.
