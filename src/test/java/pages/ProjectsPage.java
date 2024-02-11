@@ -46,4 +46,10 @@ public class ProjectsPage extends BasePage {
         return this;
     }
 
+    @Step("Validate that 'Project page' was opened")
+    public boolean isProjectsPageOpened() {
+        log.info("Checking if the Projects page is opened");
+        return $(CREATE_NEW_PROJECT_BUTTON).isDisplayed();
+    }
+
 }
