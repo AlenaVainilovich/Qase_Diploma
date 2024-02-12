@@ -8,13 +8,14 @@ import dto.SuiteFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class SuiteTest extends BaseTest {
     Project project = new ProjectFactory().newProject(7);
     Suite suite = new SuiteFactory().newSuite();
-
+    Suite updatedSuite = new SuiteFactory().updatedSuite();
     @AfterClass
     public void deleteProject() {
         new ProjectsAdapter().delete(project.getCode().toUpperCase());
@@ -57,5 +58,41 @@ public class SuiteTest extends BaseTest {
                 .create(project);
         suiteAdapter
                 .create(project.getCode().toUpperCase(), suite);
+        repositoryPage
+                .openPage(project.getCode().toUpperCase())
+                .verifyIfSuiteExist(suite)
+                .clickOnTheEditSuiteButton(suite);
+        suitesPage
+                .fillInSuiteFields(updatedSuite)
+                .clickOnSaveSuiteButton();
+        repositoryPage
+                .verifyIfSuiteExist(updatedSuite)
+                .clickOnTheEditSuiteButton(updatedSuite);
+        assertEquals(suitesPage.getSuiteTitle(), updatedSuite.getTitle(),
+                "The expected test suite name does not match the actual one.");
+        assertEquals(suitesPage.getSuiteDescription(), updatedSuite.getDescription(),
+                "The expected test suite description does not match the actual one.");
+        assertEquals(suitesPage.getSuitePreconditions(), updatedSuite.getPreconditions(),
+                "The expected test suite preconditions does not match the actual one.");
+
+    }
+
+    @Test(description = "Delete Suite")
+    public void  deleteSuite() {
+        loginPage
+                .openLoginPage()
+                .isPageOpened()
+                .login(user, password);
+        projectsAdapter
+                .create(project);
+        suiteAdapter
+                .create(project.getCode().toUpperCase(), suite);
+        repositoryPage
+                .openPage(project.getCode().toUpperCase())
+                .verifyIfSuiteExist(suite)
+                .clickOnTheDeleteSuiteButton(suite)
+                .confirmDeleting()
+                .verifyIfSuiteHasBeenDeleted(suite);
+
     }
 }
