@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import dto.Project;
 import dto.Suite;
 import dto.TestCase;
 import io.qameta.allure.Step;
@@ -18,7 +17,6 @@ public class RepositoryPage {
     public final String EDIT_CASE_BUTTON = "//*[contains(text(), 'Edit')]";
     public final String DELETE_CASE_BUTTON = "//*[contains(text(), 'Delete')]";
     public final String CASE_PROPERTIES = "//button[text()='Properties']";
-
     public final String CREATE_SUITE_BUTTON = "#create-suite-button";
     public final String EDIT_SUITE_BUTTON = "//span[contains(text(),'%s')]/parent::*//i[contains(@class, 'fa-pencil')]";
     public final String SUITE_IN_LIST = "//span[contains(text(),'%s')]";
@@ -123,7 +121,7 @@ public class RepositoryPage {
     @Step("Check that the test suite has been deleted")
     public RepositoryPage verifyIfSuiteHasBeenDeleted(Suite suite) {
         log.info("Checking that the suite '{}' has been deleted", suite.getTitle());
-        $x(String.format(SUITE_IN_LIST,suite.getTitle())) .shouldNotBe(Condition.visible);
+        $x(String.format(SUITE_IN_LIST, suite.getTitle())).shouldNotBe(Condition.visible);
         return this;
     }
 

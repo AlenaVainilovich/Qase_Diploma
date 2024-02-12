@@ -1,28 +1,20 @@
 package tests;
 
-import adapters.ProjectsAdapter;
 import dto.Project;
 import dto.ProjectFactory;
 import dto.Suite;
 import dto.SuiteFactory;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class SuiteTest extends BaseTest {
-    Project project = new ProjectFactory().newProject(7);
-    Suite suite = new SuiteFactory().newSuite();
-    Suite updatedSuite = new SuiteFactory().updatedSuite();
-    @AfterClass
-    public void deleteProject() {
-        new ProjectsAdapter().delete(project.getCode().toUpperCase());
-    }
 
     @Test(description = "Create Suite")
     public void createNewSuite() {
+        Project project = new ProjectFactory().newProject(7);
+        Suite suite = new SuiteFactory().newSuite();
         loginPage
                 .openLoginPage()
                 .isPageOpened()
@@ -46,10 +38,14 @@ public class SuiteTest extends BaseTest {
                 "The expected test suite description does not match the actual one.");
         assertEquals(suitesPage.getSuitePreconditions(), suite.getPreconditions(),
                 "The expected test suite preconditions does not match the actual one.");
+        projectsAdapter.delete(project.getCode().toUpperCase());
     }
 
     @Test(description = "Update Suite")
     public void updateSuite() {
+        Project project = new ProjectFactory().newProject(7);
+        Suite suite = new SuiteFactory().newSuite();
+        Suite updatedSuite = new SuiteFactory().updatedSuite();
         loginPage
                 .openLoginPage()
                 .isPageOpened()
@@ -74,11 +70,14 @@ public class SuiteTest extends BaseTest {
                 "The expected test suite description does not match the actual one.");
         assertEquals(suitesPage.getSuitePreconditions(), updatedSuite.getPreconditions(),
                 "The expected test suite preconditions does not match the actual one.");
+        projectsAdapter.delete(project.getCode().toUpperCase());
 
     }
 
     @Test(description = "Delete Suite")
-    public void  deleteSuite() {
+    public void deleteSuite() {
+        Project project = new ProjectFactory().newProject(7);
+        Suite suite = new SuiteFactory().newSuite();
         loginPage
                 .openLoginPage()
                 .isPageOpened()
@@ -93,6 +92,6 @@ public class SuiteTest extends BaseTest {
                 .clickOnTheDeleteSuiteButton(suite)
                 .confirmDeleting()
                 .verifyIfSuiteHasBeenDeleted(suite);
-
+        projectsAdapter.delete(project.getCode().toUpperCase());
     }
 }

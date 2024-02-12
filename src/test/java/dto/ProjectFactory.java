@@ -4,7 +4,7 @@ import com.github.javafaker.Faker;
 
 public class ProjectFactory {
     Faker faker = new Faker();
-    public String projectName = faker.witcher().character();
+    public String projectName = faker.animal().name();
 
     public String description = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
     public String updatedProjectName = faker.witcher().character();

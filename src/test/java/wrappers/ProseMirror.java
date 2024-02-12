@@ -5,7 +5,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ProseMirror {
     String label;
-    String caseLocator = "//*[text()='%s']/..//p";
+    String caseLocator = "//label[text()='%s']/following-sibling::div//div[contains(@class, 'ProseMirror')]//p";
     String suiteLocator = "//label[text()='%s']/ancestor::div[2]//p[@class]";
 
     public ProseMirror(String label) {
