@@ -14,7 +14,7 @@ public class ProjectsPage extends BasePage {
     public final String PROJECT_NAME = "//a[contains(text(),'%s')]";
     public final String CREATE_NEW_PROJECT_BUTTON = "#createButton";
 
-    @Step("Open 'Project Page'")
+    @Step("Opening the 'Project Page'")
     public ProjectsPage openPage() {
         log.info("Open 'Project Page' by link: " + baseUrl + "/login");
         open("/projects");
@@ -27,14 +27,16 @@ public class ProjectsPage extends BasePage {
         return this;
     }
 
-    @Step("Click on 'Create new project' button")
+    @Step("Clicking on the 'Create new project' button")
     public CreateNewProjectPage clickOnCreateNewProjectButton() {
         log.info("Click button 'Create new project' by locator: " + CREATE_NEW_PROJECT_BUTTON);
         $(CREATE_NEW_PROJECT_BUTTON).click();
         return new CreateNewProjectPage();
     }
 
+    @Step("Checking that the project is existed")
     public ProjectsPage verifyIsProjectExist(Project project) {
+        log.info("Checking that the project '{}' is existed", project.getTitle());
         $x(String.format(PROJECT_NAME, project.getTitle())).shouldBe(Condition.visible);
         return this;
     }
