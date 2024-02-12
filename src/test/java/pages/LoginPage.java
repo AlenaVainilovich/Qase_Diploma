@@ -38,7 +38,7 @@ public class LoginPage {
         return new ProjectsPage();
     }
 
-    @Step("Get a error message in alert")
+    @Step("Get an error message in alert")
     public String getErrorMessageInAlert() {
         String errorMessage = $x(ERROR_MESSAGE).getText();
         log.info("Getting error message '{}'", errorMessage);
