@@ -17,7 +17,7 @@ public class SuitesPage {
     private final String SUITE_TITLE = "#title";
     private final String SAVE_BUTTON = "button[type='submit']";
 
-    @Step("Fill in the fields of the test suite")
+    @Step("Fill in the fields of the 'suite.title' test suite")
     public SuitesPage fillInSuiteFields(Suite suite) {
         $(SUITE_TITLE).clear();
         $(SUITE_TITLE).setValue(suite.getTitle());

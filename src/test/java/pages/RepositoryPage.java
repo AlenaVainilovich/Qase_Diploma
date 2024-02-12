@@ -27,32 +27,37 @@ public class RepositoryPage {
 
     public final String REPOSITORY_URL = "/project/%s";
 
+    @Step("Opening the 'Repository Page'")
     public RepositoryPage isPageOpened() {
         $(CREATE_CASE_BUTTON).shouldBe(Condition.visible);
         return this;
     }
 
-    @Step("Click create Case button")
+    @Step("Clicking create Case button")
     public TestCasePage clickOnTheCreateCaseButton() {
         $(CREATE_CASE_BUTTON).click();
         return new TestCasePage();
     }
 
+    @Step("Verification that '{testCase.title}' is existed")
     public RepositoryPage verifyIfCaseExist(TestCase testCase) {
         $x(String.format(CASE_NAME, testCase.getTitle())).shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Clicking on the test case name")
     public RepositoryPage clickOnTheCaseName(TestCase testCase) {
         $x(String.format(CASE_NAME, testCase.getTitle())).click();
         return this;
     }
 
+    @Step("Clicking on the edit button")
     public EditCasePage clickOnTheEditCaseButton() {
         $x(EDIT_CASE_BUTTON).click();
         return new EditCasePage();
     }
 
+    @Step("Clicking on the delete button")
     public void clickOnTheDeleteButton() {
         $x(DELETE_CASE_BUTTON).click();
     }
@@ -100,25 +105,25 @@ public class RepositoryPage {
     @Step("Check that the test suite has been created")
     public RepositoryPage verifyIfSuiteExist(Suite suite) {
         $x(String.format(SUITE_IN_LIST, suite.getTitle())).shouldBe(Condition.visible);
-        log.info("Suite with title {} has been created");
+        log.info("Suite with title {} has been created", suite.getTitle());
         return this;
     }
 
-    @Step("Open project by code {} ")
+    @Step("Open project by code '{code}'")
     public RepositoryPage openPage(String code) {
         open(String.format(REPOSITORY_URL, code));
-        log.info("Opening project by code {}");
+        log.info("Opening project by code {}", code);
         return new RepositoryPage();
     }
 
-    @Step("Delete suite by name {} ")
+    @Step("Delete suite by name '{suite.title}'")
     public RepositoryPage clickOnTheDeleteSuiteButton(Suite suite) {
         $x(String.format(DELETE_SUITE_BUTTON, suite.getTitle())).click();
-        log.info("Deleting suite by name {}");
+        log.info("Deleting suite by name {}", suite.getTitle());
         return this;
     }
 
-    @Step("Check that the test suite has been deleted")
+    @Step("Check that the '{suite.title}' test suite has been deleted")
     public RepositoryPage verifyIfSuiteHasBeenDeleted(Suite suite) {
         log.info("Checking that the suite '{}' has been deleted", suite.getTitle());
         $x(String.format(SUITE_IN_LIST, suite.getTitle())).shouldNotBe(Condition.visible);

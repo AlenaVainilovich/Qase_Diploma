@@ -56,7 +56,7 @@ public class ProjectSettingsPage {
         return actualProjectAccessType;
     }
 
-    @Step("Updating existing project data")
+    @Step("Updating the '{project.title}' project data")
     public ProjectSettingsPage updateProjectFields(Project project) {
         log.info("Updating project with new project name: '{}', project code: '{}', description: '{}'", project.getTitle(), project.getCode(), project.getDescription());
         $(PROJECT_NAME_CSS).clear();
@@ -87,7 +87,7 @@ public class ProjectSettingsPage {
         return this;
     }
 
-    @Step("Waiting till the 'Project settings page' is opened")
+    @Step("Waiting till the 'Delete project' modal window is opened")
     public ProjectSettingsPage deleteModalWindowIsOpened() {
         log.info("Checking that the delete modal window is opened");
         $(MODAL_DELETE_WINDOW_CSS).shouldBe(Condition.visible);

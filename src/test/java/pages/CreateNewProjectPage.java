@@ -38,7 +38,7 @@ public class CreateNewProjectPage extends BasePage {
         return new CreateNewProjectPage();
     }
 
-    @Step("Filling the project fields")
+    @Step("Filling in fields for the '{project.title}' project")
     public CreateNewProjectPage fillProjectFields(Project project) {
         log.info("Project fields is filling with " +
                         "Project name = '{}', Project code = '{}', Description = '{}'",
