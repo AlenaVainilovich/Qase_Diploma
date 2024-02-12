@@ -18,10 +18,10 @@ public class EditCasePage {
     }
 
     public EditCasePage editTestCase(TestCase editedCase) {
-        new ProseMirror("Description").write(editedCase.getDescription());
+        new ProseMirror("Description").writeCase(editedCase.getDescription());
         new DropDown("Severity").select(editedCase.getSeverity());
         new DropDown("Priority").select(editedCase.getPriority());
-        new ProseMirror("Pre-conditions").write(editedCase.getPreconditions());
+        new ProseMirror("Pre-conditions").writeCase(editedCase.getPreconditions());
         return this;
     }
 

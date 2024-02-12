@@ -10,7 +10,7 @@ public class ProjectsAdapter extends BaseAdapter {
                 when().
                 post(BASE_API_URL + "project").
                 then().
-                log().body().
+                log().ifValidationFails().
                 statusCode(200);
     }
 
@@ -19,7 +19,7 @@ public class ProjectsAdapter extends BaseAdapter {
                 when().
                 delete(BASE_API_URL + "project/" + code).
                 then().
-                log().body().
+                log().ifValidationFails().
                 statusCode(200);
     }
 

@@ -15,4 +15,12 @@ public class SuiteFactory {
                 .preconditions(preconditions)
                 .build();
     }
+
+    public Suite updatedSuite() {
+        return Suite.builder()
+                .title(title)
+                .description(description)
+                .preconditions(preconditions)
+                .build();
+    }
 }

@@ -21,7 +21,7 @@ public class TestCasePage extends BasePage {
         $(CASE_TITLE).clear();
         $(CASE_TITLE).setValue(testCase.getTitle());
         new DropDown("Status").select(testCase.getStatus());
-        new ProseMirror("Description").write(testCase.getDescription());
+        new ProseMirror("Description").writeCase(testCase.getDescription());
         new DropDown("Severity").select(testCase.getSeverity());
         new DropDown("Priority").select(testCase.getPriority());
         new DropDown("Type").select(testCase.getType());
@@ -29,8 +29,8 @@ public class TestCasePage extends BasePage {
         new DropDown("Is flaky").select(testCase.getIsFlaky());
         new DropDown("Behavior").select(testCase.getBehavior());
         new DropDown("Automation status").select(testCase.getAutomation());
-        new ProseMirror("Pre-conditions").write(testCase.getPreconditions());
-        new ProseMirror("Post-conditions").write(testCase.getPostconditions());
+        new ProseMirror("Pre-conditions").writeCase(testCase.getPreconditions());
+        new ProseMirror("Post-conditions").writeCase(testCase.getPostconditions());
         return this;
     }
 

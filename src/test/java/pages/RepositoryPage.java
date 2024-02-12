@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import dto.Suite;
 import dto.TestCase;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
@@ -16,8 +17,10 @@ public class RepositoryPage {
     public final String EDIT_CASE_BUTTON = "//*[contains(text(), 'Edit')]";
     public final String DELETE_CASE_BUTTON = "//*[contains(text(), 'Delete')]";
     public final String CASE_PROPERTIES = "//button[text()='Properties']";
-    public final String EDIT_SUITE_BUTTON = "//span[contains(text(), '%s')]//parent::h3//i[contains(@class, 'fa-pencil')]";
-    //public final String DELETE_SUITE_BUTTON = ".fa-trash";
+    public final String CREATE_SUITE_BUTTON = "#create-suite-button";
+    public final String EDIT_SUITE_BUTTON = "//span[contains(text(),'%s')]/parent::*//i[contains(@class, 'fa-pencil')]";
+    public final String SUITE_IN_LIST = "//span[contains(text(),'%s')]";
+    public final String DELETE_SUITE_BUTTON = "//span[contains(text(),'%s')]/parent::*//i[contains(@class, 'fa-trash')]";
     public final String CONFIRM_DELETE = "//div[contains(@class,'ReactModal__Content')]/descendant::*[text()='Delete']";
     public final String SIDEBAR_SECTION = "//*[contains(text(), '%s')]";
     public final String ERROR_MESSAGE_FOR_PROJECT_CODE_CSS = "//div//input[@id='project-code']/../..//div[contains(text(), 'The code ')]";
@@ -29,6 +32,7 @@ public class RepositoryPage {
         return this;
     }
 
+    @Step("Click create Case button")
     public TestCasePage clickOnTheCreateCaseButton() {
         $(CREATE_CASE_BUTTON).click();
         return new TestCasePage();
@@ -53,8 +57,10 @@ public class RepositoryPage {
         $x(DELETE_CASE_BUTTON).click();
     }
 
-    public void confirmDeleting() {
+    @Step("Confirmation of deletion by clicking the Delete button")
+    public RepositoryPage confirmDeleting() {
         $x(CONFIRM_DELETE).click();
+        return this;
     }
 
     @Step("Checking error message below project code field")
@@ -77,14 +83,46 @@ public class RepositoryPage {
         return new RepositoryPage();
     }
 
-    public void clickOnTheEditSuiteButton() {
-        $(EDIT_SUITE_BUTTON).click();
-
+    @Step("Click on the test suite editing button")
+    public SuitesPage clickOnTheEditSuiteButton(Suite suite) {
+        $x(String.format(EDIT_SUITE_BUTTON, suite.getTitle())).click();
+        log.info("The test suite editing window should be open.");
+        return new SuitesPage();
     }
 
+    @Step("Click create Case button")
+    public SuitesPage clickOnTheCreateSuiteButton() {
+        log.info("Click on the create Suite button");
+        $(CREATE_SUITE_BUTTON).click();
+        return new SuitesPage();
+    }
+
+    @Step("Check that the test suite has been created")
+    public RepositoryPage verifyIfSuiteExist(Suite suite) {
+        $x(String.format(SUITE_IN_LIST, suite.getTitle())).shouldBe(Condition.visible);
+        log.info("Suite with title {} has been created");
+        return this;
+    }
+
+    @Step("Open project by code {} ")
     public RepositoryPage openPage(String code) {
         open(String.format(REPOSITORY_URL, code));
+        log.info("Opening project by code {}");
         return new RepositoryPage();
+    }
+
+    @Step("Delete suite by name {} ")
+    public RepositoryPage clickOnTheDeleteSuiteButton(Suite suite) {
+        $x(String.format(DELETE_SUITE_BUTTON, suite.getTitle())).click();
+        log.info("Deleting suite by name {}");
+        return this;
+    }
+
+    @Step("Check that the test suite has been deleted")
+    public RepositoryPage verifyIfSuiteHasBeenDeleted(Suite suite) {
+        log.info("Checking that the suite '{}' has been deleted", suite.getTitle());
+        $x(String.format(SUITE_IN_LIST, suite.getTitle())).shouldNotBe(Condition.visible);
+        return this;
     }
 
 }
