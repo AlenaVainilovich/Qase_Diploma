@@ -33,9 +33,9 @@ public class ProjectTest extends BaseTest {
         projectsPage
                 .openPage()
                 .verifyIsProjectExist(projectForCreation);
-/*        sleep(2000);
+        sleep(2000);
         projectsAdapter
-                .delete(String.format(projectForCreation.getCode()).toUpperCase());*/
+                .delete(String.format(projectForCreation.getCode()).toUpperCase());
     }
 
     @Test(description = "Project data should be updated with valid data")
@@ -96,6 +96,7 @@ public class ProjectTest extends BaseTest {
                 .verifyIfSidebarSectionExists("Settings")
                 .clickOnTheSidebarSection("Settings");
         projectSettingsPage
+                .isPageOpened()
                 .clickOnDeleteProjectButton()
                 .deleteModalWindowIsOpened();
         projectSettingsPage

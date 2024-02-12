@@ -5,8 +5,7 @@ import dto.Project;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 
 @Log4j2
@@ -47,6 +46,7 @@ public class CreateNewProjectPage extends BasePage {
         $(PROJECT_NAME_CSS).clear();
         $(PROJECT_NAME_CSS).setValue(project.getTitle());
         $(PROJECT_CODE_CSS).clear();
+        sleep(300);
         $(PROJECT_CODE_CSS).setValue(project.getCode());
         $(DESCRIPTION_CSS).clear();
         $(DESCRIPTION_CSS).setValue(project.getDescription());
