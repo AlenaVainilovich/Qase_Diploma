@@ -52,4 +52,11 @@ public class ProjectsPage extends BasePage {
         return $(CREATE_NEW_PROJECT_BUTTON).isDisplayed();
     }
 
+    @Step("Choose project by name and click on it")
+    public RepositoryPage chooseProjectByName(Project project) {
+        log.info("Choose project by name '{}' and click on it");
+        $x(String.format(PROJECT_NAME, project.getTitle())).shouldBe(Condition.visible).click();
+        return new RepositoryPage();
+    }
+
 }

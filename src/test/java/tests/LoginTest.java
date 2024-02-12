@@ -8,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 public class LoginTest extends BaseTest {
 
     public String invalidUser = faker.internet().emailAddress();
-    public String invalidPassword = faker.internet().password(5,12, true, true);
+    public String invalidPassword = faker.internet().password(5, 12, true, true);
 
     @Test(description = "Successful login")
     public void login() {
