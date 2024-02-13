@@ -6,7 +6,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class LoginTest extends BaseTest {
-
+//test
     public String invalidUser = faker.internet().emailAddress();
     public String invalidPassword = faker.internet().password(5, 12, true, true);
 
