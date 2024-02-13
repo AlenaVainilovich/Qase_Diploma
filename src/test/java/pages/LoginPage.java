@@ -45,7 +45,7 @@ public class LoginPage {
         return errorMessage;
     }
 
-    @Step("Get a error message about required fields.")
+    @Step("Get an error message about required fields.")
     public String getErrorMessageAboutRequiredFields() {
         String requiredErrorMessage = $x(REQUIRED_ERROR_MESSAGE).getText();
         log.info("Getting error message '{}'", requiredErrorMessage);
