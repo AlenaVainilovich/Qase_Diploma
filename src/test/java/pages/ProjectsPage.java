@@ -34,14 +34,14 @@ public class ProjectsPage extends BasePage {
         return new CreateNewProjectPage();
     }
 
-    @Step("Checking that the project is existed")
+    @Step("Checking that the '{project.title}' project is existed")
     public ProjectsPage verifyIsProjectExist(Project project) {
         log.info("Checking that the project '{}' is existed", project.getTitle());
         $x(String.format(PROJECT_NAME, project.getTitle())).shouldBe(Condition.visible);
         return this;
     }
 
-    @Step("Checking that the project is deleted")
+    @Step("Checking that the '{project.title}' project is deleted")
     public ProjectsPage verifyIfProjectDelete(Project project) {
         log.info("Checking that the project '{}' is deleted", project.getTitle());
         $x(String.format(PROJECT_NAME, project.getTitle())).shouldNotBe(Condition.visible);
@@ -54,9 +54,9 @@ public class ProjectsPage extends BasePage {
         return $(CREATE_NEW_PROJECT_BUTTON).isDisplayed();
     }
 
-    @Step("Choose project by name and click on it")
+    @Step("Choose project by '{project.title}' name and click on it")
     public RepositoryPage chooseProjectByName(Project project) {
-        log.info("Choose project by name '{}' and click on it");
+        log.info("Choose project by name '{}' and click on it", project.getTitle());
         $x(String.format(PROJECT_NAME, project.getTitle())).shouldBe(Condition.visible).click();
         return new RepositoryPage();
     }

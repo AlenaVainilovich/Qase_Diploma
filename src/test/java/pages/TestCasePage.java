@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import dto.TestCase;
+import io.qameta.allure.Step;
 import wrappers.DropDown;
 import wrappers.ProseMirror;
 
@@ -11,12 +12,12 @@ public class TestCasePage extends BasePage {
 
     public final String CASE_TITLE = "#title";
     public final String SAVE_BUTTON = "#save-case";
-
+    @Step("Opening the 'Test case' page")
     public TestCasePage isPageOpened() {
         $(SAVE_BUTTON).shouldBe(Condition.visible);
         return this;
     }
-
+    @Step("Creating a new test case")
     public TestCasePage createNewTestCase(TestCase testCase) {
         $(CASE_TITLE).clear();
         $(CASE_TITLE).setValue(testCase.getTitle());
@@ -33,7 +34,7 @@ public class TestCasePage extends BasePage {
         new ProseMirror("Post-conditions").writeCase(testCase.getPostconditions());
         return this;
     }
-
+    @Step("Clicking on the save button ")
     public RepositoryPage clickOnSaveNewCaseButton() {
         $(SAVE_BUTTON).shouldBe(Condition.appear).click();
         return new RepositoryPage();

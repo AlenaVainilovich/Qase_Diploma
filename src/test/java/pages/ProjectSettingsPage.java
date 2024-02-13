@@ -16,7 +16,7 @@ public class ProjectSettingsPage {
     public final String DESCRIPTION_CSS = "#description-area";
     public final String UPDATE_SETTINGS_BUTTON_CSS = "[type='submit']";
     public final String SUCCESS_NOTIFICATION = "//*[contains(text(), 'Project settings were successfully updated!')]";
-    public final String DELETE_PROJECT_BUTTON_CSS = ".fa-trash";
+    public final String DELETE_PROJECT_BUTTON = "//*[contains(@id, 'application-content')]//*[contains(text(), 'Delete project')]";
     public final String CONFIRM_DELETE = "//*[contains(@class, 'ReactModalPortal')]//*[contains(text(), 'Delete project')]";
     public final String MODAL_DELETE_WINDOW_CSS = ".ReactModal__Content";
     private final By PROJECT_SETTING_TITLE = By.tagName("h1");
@@ -56,7 +56,7 @@ public class ProjectSettingsPage {
         return actualProjectAccessType;
     }
 
-    @Step("Updating existing project data")
+    @Step("Updating the '{project.title}' project data")
     public ProjectSettingsPage updateProjectFields(Project project) {
         log.info("Updating project with new project name: '{}', project code: '{}', description: '{}'", project.getTitle(), project.getCode(), project.getDescription());
         $(PROJECT_NAME_CSS).clear();
@@ -83,11 +83,11 @@ public class ProjectSettingsPage {
 
     @Step("Clicking on delete project button")
     public ProjectSettingsPage clickOnDeleteProjectButton() {
-        $(DELETE_PROJECT_BUTTON_CSS).click();
+        $x(DELETE_PROJECT_BUTTON).click();
         return this;
     }
 
-    @Step("Waiting till the 'Project settings page' is opened")
+    @Step("Waiting till the 'Delete project' modal window is opened")
     public ProjectSettingsPage deleteModalWindowIsOpened() {
         log.info("Checking that the delete modal window is opened");
         $(MODAL_DELETE_WINDOW_CSS).shouldBe(Condition.visible);
