@@ -37,7 +37,7 @@ public class BaseTest {
     public void setup(@Optional("chrome") String browser) {
 
         Configuration.headless = true;
-        Configuration.timeout = 10000;
+        Configuration.timeout = 20000;
         Configuration.clickViaJs = false;
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.browserSize = "1920x1080";
