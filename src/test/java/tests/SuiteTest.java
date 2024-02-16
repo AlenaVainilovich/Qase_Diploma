@@ -46,14 +46,14 @@ public class SuiteTest extends BaseTest {
         Project project = new ProjectFactory().newProject(7);
         Suite suite = new SuiteFactory().newSuite();
         Suite updatedSuite = new SuiteFactory().updatedSuite();
-        loginPage
-                .openLoginPage()
-                .isPageOpened()
-                .login(user, password);
         projectsAdapter
                 .create(project);
         suiteAdapter
                 .create(project.getCode().toUpperCase(), suite);
+        loginPage
+                .openLoginPage()
+                .isPageOpened()
+                .login(user, password);
         repositoryPage
                 .openPage(project.getCode().toUpperCase())
                 .isPageOpened()
@@ -79,14 +79,14 @@ public class SuiteTest extends BaseTest {
     public void deleteSuite() {
         Project project = new ProjectFactory().newProject(7);
         Suite suite = new SuiteFactory().newSuite();
-        loginPage
-                .openLoginPage()
-                .isPageOpened()
-                .login(user, password);
         projectsAdapter
                 .create(project);
         suiteAdapter
                 .create(project.getCode().toUpperCase(), suite);
+        loginPage
+                .openLoginPage()
+                .isPageOpened()
+                .login(user, password);
         repositoryPage
                 .openPage(project.getCode().toUpperCase())
                 .isPageOpened()
