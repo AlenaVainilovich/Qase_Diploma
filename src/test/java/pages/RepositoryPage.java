@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 
 @Log4j2
-public class RepositoryPage {
+public class RepositoryPage extends BasePage {
     public final String CREATE_CASE_BUTTON = "#create-case-button";
     public final String CASE_NAME = "//*[@id='suitecases-container']//*[contains(text(), '%s')]";
     public final String EDIT_CASE_BUTTON = "//*[contains(text(), 'Edit')]";
@@ -29,6 +29,7 @@ public class RepositoryPage {
 
     @Step("Opening the 'Repository Page'")
     public RepositoryPage isPageOpened() {
+        waitForPageLoaded();
         $(CREATE_CASE_BUTTON).shouldBe(Condition.visible);
         return this;
     }
