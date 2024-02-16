@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="2" name="Qase_Diploma Smoke Test" parallel="tests">
+<suite thread-count="1" name="Qase_Diploma Smoke Test" parallel="tests">
     <listeners>
         <listener class-name="tests.base.TestListener"></listener>
         <listener class-name="tests.base.AnnotationTransformer"></listener>
