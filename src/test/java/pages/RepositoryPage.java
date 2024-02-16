@@ -29,8 +29,8 @@ public class RepositoryPage extends BasePage {
 
     @Step("Opening the 'Repository Page'")
     public RepositoryPage isPageOpened() {
-        waitForPageLoaded();
         $(CREATE_CASE_BUTTON).shouldBe(Condition.visible);
+        waitForPageLoaded();
         return this;
     }
 
